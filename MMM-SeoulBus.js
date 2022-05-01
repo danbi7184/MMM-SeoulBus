@@ -1,157 +1,77 @@
-/* global Module */
-
-/* Magic Mirror
- * Module: {{MODULE_NAME}}
- *
- * By {{AUTHOR_NAME}}
- * {{LICENSE}} Licensed.
- */
-
-Module.register("{{MODULE_NAME}}", {
-	defaults: {
-		updateInterval: 60000,
-		retryDelay: 5000
+Module.register("MMM-SeoulBus", {
+	requiresVersion: "2.12.0",
+	default: {
+	  sample1: "http://ws.bus.go.kr/api/rest/stationinfo/getStationByName", // 정류소 명칭 검색
+	  sample2: "http://ws.bus.go.kr/api/rest/arrive/getLowArrInfoByStId", // 버스 도착 예정 정보 조회
+	  key1: "",
+	  key2: "",
+	  stSrch: "", // 정류소명
+	  header: "버스 도착 정보",
+	  updateInterval: 60000,
 	},
-
-	requiresVersion: "2.1.0", // Required version of MagicMirror
-
-	start: function() {
-		var self = this;
-		var dataRequest = null;
-		var dataNotification = null;
-
-		//Flag for check if module is loaded
-		this.loaded = false;
-
-		// Schedule update timer.
-		this.getData();
-		setInterval(function() {
-			self.updateDom();
-		}, this.config.updateInterval);
-	},
-
-	/*
-	 * getData
-	 * function example return data and show it in the module wrapper
-	 * get a URL request
-	 *
-	 */
-	getData: function() {
-		var self = this;
-
-		var urlApi = "https://jsonplaceholder.typicode.com/posts/1";
-		var retry = true;
-
-		var dataRequest = new XMLHttpRequest();
-		dataRequest.open("GET", urlApi, true);
-		dataRequest.onreadystatechange = function() {
-			console.log(this.readyState);
-			if (this.readyState === 4) {
-				console.log(this.status);
-				if (this.status === 200) {
-					self.processData(JSON.parse(this.response));
-				} else if (this.status === 401) {
-					self.updateDom(self.config.animationSpeed);
-					Log.error(self.name, this.status);
-					retry = false;
-				} else {
-					Log.error(self.name, "Could not load data.");
-				}
-				if (retry) {
-					self.scheduleUpdate((self.loaded) ? -1 : self.config.retryDelay);
-				}
-			}
-		};
-		dataRequest.send();
-	},
-
-
-	/* scheduleUpdate()
-	 * Schedule next update.
-	 *
-	 * argument delay number - Milliseconds before next update.
-	 *  If empty, this.config.updateInterval is used.
-	 */
-	scheduleUpdate: function(delay) {
-		var nextLoad = this.config.updateInterval;
-		if (typeof delay !== "undefined" && delay >= 0) {
-			nextLoad = delay;
-		}
-		nextLoad = nextLoad ;
-		var self = this;
-		setTimeout(function() {
-			self.getData();
-		}, nextLoad);
-	},
-
-	getDom: function() {
-		var self = this;
-
-		// create element wrapper for show into the module
-		var wrapper = document.createElement("div");
-		// If this.dataRequest is not empty
-		if (this.dataRequest) {
-			var wrapperDataRequest = document.createElement("div");
-			// check format https://jsonplaceholder.typicode.com/posts/1
-			wrapperDataRequest.innerHTML = this.dataRequest.title;
-
-			var labelDataRequest = document.createElement("label");
-			// Use translate function
-			//             this id defined in translations files
-			labelDataRequest.innerHTML = this.translate("TITLE");
-
-
-			wrapper.appendChild(labelDataRequest);
-			wrapper.appendChild(wrapperDataRequest);
-		}
-
-		// Data from helper
-		if (this.dataNotification) {
-			var wrapperDataNotification = document.createElement("div");
-			// translations  + datanotification
-			wrapperDataNotification.innerHTML =  this.translate("UPDATE") + ": " + this.dataNotification.date;
-
-			wrapper.appendChild(wrapperDataNotification);
-		}
-		return wrapper;
-	},
-
-	getScripts: function() {
-		return [];
-	},
-
+  
 	getStyles: function () {
-		return [
-			"{{MODULE_NAME}}.css",
-		];
+	  return ["MMM-SeoulBus.css"];
 	},
-
-	// Load translations files
-	getTranslations: function() {
-		//FIXME: This can be load a one file javascript definition
-		return {
-			en: "translations/en.json",
-			es: "translations/es.json"
-		};
+  
+	getHeader: function () {
+	  if (this.busInfo) {
+		return "<i class='fa fa-fw fa-bus'></i> " + this.config.header;
+	  }
+	  return "<i class='fa fa-fw fa-bus'></i> 지하철 정보";
 	},
-
-	processData: function(data) {
-		var self = this;
-		this.dataRequest = data;
-		if (this.loaded === false) { self.updateDom(self.config.animationSpeed) ; }
-		this.loaded = true;
-
-		// the data if load
-		// send notification to helper
-		this.sendSocketNotification("{{MODULE_NAME}}-NOTIFICATION_TEST", data);
+  
+	start: function () {
+	  Log.info("Starting module: " + this.name);
+	  this.busInfo = [];
+	  var self = this;
+	  this.loaded = false;
 	},
+  
+	getDom: function () {
+	  var wrapper = document.createElement("div");
+	  if (!this.loaded) {
+		return wrapper;
+	  }
+	  var busTable = document.createElement("table");
+	  busTable.className = "small";
+	  var bus = this.busInfo;
 
-	// socketNotificationReceived from helper
+	  wrapper.appendChild(busTable);
+	  return wrapper;
+	},
+  
+	getBusInfo: function () {
+	  Log.info("Requesting bus info");
+	  this.sendSocketNotification("GET_BUS_DATA", {
+		config: this.config,
+		identifier: this.identifier,
+	  });
+	},
+  
+	notificationReceived: function (notification, payload, sender) {
+	  switch (notification) {
+		case "DOM_OBJECTS_CREATED":
+		  this.getBusInfo();
+		  var timer = setInterval(() => {
+			this.getBusInfo();
+		  }, this.config.updateInterval);
+		  break;
+	  }
+	},
+  
 	socketNotificationReceived: function (notification, payload) {
-		if(notification === "{{MODULE_NAME}}-NOTIFICATION_TEST") {
-			// set dataNotification
-			this.dataNotification = payload;
-			this.updateDom();
-		}
+	  switch (notification) {
+		case "BUS_DATA":
+		  this.loaded = true;
+		  console.log("NotificationReceived:" + notification);
+		  this.busInfo = payload;
+		  this.updateDom();
+		  break;
+		case "BUS_DATA_ERROR":
+		  this.updateDom();
+		  break;
+	  }
 	},
-});
+  });
+  
