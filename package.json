@@ -1,0 +1,27 @@
+{
+  "name": "mmm-seoulbus",
+  "version": "1.0.0",
+  "description": "bus information",
+  "main": "MMM-SeoulBus.js",
+  "scripts": {
+    "test": "console.log(\"This is a test\")"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danbi7184/MMM-SeoulBus.git"
+  },
+  "keywords": [
+    "Magic",
+    "Mirror"
+  ],
+  "author": "scheduler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danbi7184/MMM-SeoulBus/issues"
+  },
+  "homepage": "https://github.com/danbi7184/MMM-SeoulBus#readme",
+  "dependencies": {
+    "request": "^2.88.2",
+    "xml-js": "^1.6.11"
+  }
+}
