@@ -28,7 +28,7 @@ module.exports = NodeHelper.create({
       }, function (error, response, body) {
         if (!error && response.statusCode === 200) {
           var result = convert.xml2json(body, { compact: true, spaces: 4 });
-          var data = JSON.parse(result).response;
+          var data = JSON.parse(result).ServiceResult;
           if(data.hasOwnProperty("msgBody") && Array.isArray(data.msgBody.itemList)) {
               var busArrivalList = data.msgBody.itemList;
               self.sendSocketNotification("BUS_DATA", busArrivalList);
