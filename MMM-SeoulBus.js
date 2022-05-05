@@ -70,7 +70,7 @@ Module.register("MMM-SeoulBus", {
 				} else {
 				  var pos1 = bus[i].arrmsg1._text.indexOf("분");
 				  var arrmsg = bus[i].arrmsg1._text.substr(0, pos1 + 1);
-				  arrmsg1Arr[i].innerHTML = bus[i].arrmsg;
+				  arrmsg1Arr[i].innerHTML = arrmsg;
 				  RowArr[i].appendChild(arrmsg1Arr[i]);
 				}
 			}
