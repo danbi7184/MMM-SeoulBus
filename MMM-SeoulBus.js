@@ -64,9 +64,6 @@ Module.register("MMM-SeoulBus", {
 				arrmsg1Arr[i].innerHTML = bus[i].arrmsg1._text;
         RowArr[i].appendChild(arrmsg1Arr[i]);
 
-				arrmsg1Arr[i] = document.createElement("td");
-				arrmsg1Arr[i].innerHTML = bus[i].arrmsg1._text;
-        RowArr[i].appendChild(arrmsg1Arr[i]);
 			}
 		}
 
