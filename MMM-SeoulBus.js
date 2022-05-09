@@ -85,8 +85,8 @@ Module.register("MMM-SeoulBus", {
 				  var arrmsg = bus[i].arrmsg1._text.substr(0, pos1 + 1);
 					arrmsg1Arr[i].className = "arvlMsg"
 					var pos2 = bus[i].arrmsg1._text.indexOf("후");
-					var pos3 = bus[i].arrmsg1._text.indexOf("번");
-					var real_location = bus[i].arrmsg1._text.substr(pos2+2, pos3);
+					var pos3 = bus[i].arrmsg1._text.indexOf("째");
+					var real_location = bus[i].arrmsg1._text.substr(pos2+2, pos3-1);
 					arrmsg = arrmsg + " (" + real_location + "전)";
 				  arrmsg1Arr[i].innerHTML = arrmsg;
 				  RowArr[i].appendChild(arrmsg1Arr[i]);
