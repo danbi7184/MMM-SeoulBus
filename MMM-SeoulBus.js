@@ -69,6 +69,8 @@ Module.register("MMM-SeoulBus", {
 					rtNmArr[i].className = "YellowBus"
 				} else if(bus[i].routeType._text == "6") {
 					rtNmArr[i].className = "RedBus"
+				} else if(bus[i].routeType._text == "8") {
+					rtNmArr[i].className = "NormalBus"
 				}
 				rtNmArr[i].innerHTML = bus[i].rtNm._text;
         RowArr[i].appendChild(rtNmArr[i]);
@@ -82,7 +84,7 @@ Module.register("MMM-SeoulBus", {
 				  var pos1 = bus[i].arrmsg1._text.indexOf("분");
 				  var arrmsg = bus[i].arrmsg1._text.substr(0, pos1 + 1);
 					arrmsg1Arr[i].className = "arvlMsg"
-					var pos2 = bus[i].arrmsg1._text.indexOf("(");
+					var pos2 = bus[i].arrmsg1._text.indexOf("[");
 					var pos3 = bus[i].arrmsg1._text.indexOf("번");
 					var real_location = bus[i].arrmsg1._text.substr(pos2, pos3);
 					arrmsg = arrmsg + " (" + real_location + "전)";
