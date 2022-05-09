@@ -57,6 +57,19 @@ Module.register("MMM-SeoulBus", {
         busTable.appendChild(RowArr[i]);
 
 				rtNmArr[i] = document.createElement("td");
+				if(bus[i].routeType._text == "1") {
+					rtNmArr[i].className = "AirportBus"
+				} else if(bus[i].routeType._text == "2") {
+					rtNmArr[i].className = "ShuttleBus"
+				} else if(bus[i].routeType._text == "3") {
+					rtNmArr[i].className = "BlueBus"
+				} else if(bus[i].routeType._text == "4") {
+					rtNmArr[i].className = "GreenBus"
+				} else if(bus[i].routeType._text == "5") {
+					rtNmArr[i].className = "YellowBus"
+				} else if(bus[i].routeType._text == "6") {
+					rtNmArr[i].className = "RedBus"
+				}
 				rtNmArr[i].innerHTML = bus[i].rtNm._text;
         RowArr[i].appendChild(rtNmArr[i]);
 
