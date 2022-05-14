@@ -36,6 +36,7 @@ Module.register("MMM-SeoulBus", {
 	  }
 	  var busTable = document.createElement("table");
 	  busTable.className = "small";
+		busTable.style.borderSpacing = "3px";
 	  var bus = this.busInfo;
 
 		var RowArr = new Array();
