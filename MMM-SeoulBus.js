@@ -36,7 +36,7 @@ Module.register("MMM-SeoulBus", {
 	  }
 	  var busTable = document.createElement("table");
 	  busTable.className = "small";
-		busTable.style.borderSpacing = "3px";
+		busTable.style.borderSpacing = "10px";
 		busTable.style.borderCollapse  = "collapse";
 	  var bus = this.busInfo;
 
