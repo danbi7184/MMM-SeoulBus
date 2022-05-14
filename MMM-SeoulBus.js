@@ -60,6 +60,9 @@ Module.register("MMM-SeoulBus", {
 
 				routeTypeArr[i] = document.createElement("td");
 				rtNmArr[i] = document.createElement("td");
+				routeTypeArr[i].setAttribute('colSpan','2');
+				rtNmArr[i].setAttribute('colSpan','2');
+
 				if(bus[i].routeType._text == "1") {
 					rtNmArr[i].className = "AirportBus"
 					routeTypeArr[i].className = "AirportBus"
