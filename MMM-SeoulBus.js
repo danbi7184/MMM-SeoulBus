@@ -69,6 +69,7 @@ Module.register("MMM-SeoulBus", {
 				rtNmArr[i] = document.createElement("td");
 				routeTypeArr[i].setAttribute('rowSpan','2');
 				rtNmArr[i].setAttribute('rowSpan','2');
+				routeTypeArr[i].style.backgroundColor = "white";
 
 				if(bus[i].routeType._text == "1") {
 					rtNmArr[i].className = "AirportBus"
