@@ -121,22 +121,25 @@ Module.register("MMM-SeoulBus", {
 				  RowArr[i].appendChild(arrmsg1Arr[i]);
 				}
 
+				if(!bus[i].arrmsg2._text.includes("운행종료") && !bus[i].arrmsg2._text.includes("출발대기")
+				&& !bus[i].arrmsg2._text.includes("회차대기")) {
 				arrmsg2Arr[i] = document.createElement("td");
-				if(bus[i].arrmsg2._text == "곧 도착") {
-					arrmsg2Arr[i].className = "arvlMsg"
-				  arrmsg2Arr[i].innerHTML = bus[i].arrmsg2._text;
-				  RowArr2[i].appendChild(arrmsg2Arr[i]);
-				} else {
-				  var pos1 = bus[i].arrmsg2._text.indexOf("분");
-				  var arrmsg = bus[i].arrmsg2._text.substr(0, pos1 + 1);
-					arrmsg2Arr[i].className = "arvlMsg"
-					var pos2 = bus[i].arrmsg2._text.indexOf("[");
-					var pos3 = bus[i].arrmsg2._text.substr(pos2 + 1);
-					var pos4 = pos3.indexOf("번");
-					var real_location = pos3.substr(0, pos4);
-					arrmsg = arrmsg + " (" + real_location + "전)";
-				  arrmsg2Arr[i].innerHTML = arrmsg;
-				  RowArr2[i].appendChild(arrmsg2Arr[i]);
+					if(bus[i].arrmsg2._text == "곧 도착") {
+						arrmsg2Arr[i].className = "arvlMsg"
+					  arrmsg2Arr[i].innerHTML = bus[i].arrmsg2._text;
+					  RowArr2[i].appendChild(arrmsg2Arr[i]);
+					} else {
+					  var pos1 = bus[i].arrmsg2._text.indexOf("분");
+					  var arrmsg = bus[i].arrmsg2._text.substr(0, pos1 + 1);
+						arrmsg2Arr[i].className = "arvlMsg"
+						var pos2 = bus[i].arrmsg2._text.indexOf("[");
+						var pos3 = bus[i].arrmsg2._text.substr(pos2 + 1);
+						var pos4 = pos3.indexOf("번");
+						var real_location = pos3.substr(0, pos4);
+						arrmsg = arrmsg + " (" + real_location + "전)";
+					  arrmsg2Arr[i].innerHTML = arrmsg;
+					  RowArr2[i].appendChild(arrmsg2Arr[i]);
+					}
 				}
 			}
 		}
