@@ -50,7 +50,7 @@ Module.register("MMM-SeoulBus", {
 
 		for(var i=0; i<bus.length; i++) {
 			if(!bus[i].arrmsg1._text.includes("운행종료") && !bus[i].arrmsg1._text.includes("출발대기")
-			&& !bus[i].arrmsg1._text.includes("회차대기")) {
+			&& !bus[i].arrmsg1._text.includes("회차대기") && !bus[i].arrmsg1._text.includes("차고지출발")) {
 				RowArr[i] = 'row' + i;
 				RowArr2[i] = 'row2' + i;
 				routeTypeArr[i] = 'routeType' + i;
@@ -123,7 +123,7 @@ Module.register("MMM-SeoulBus", {
 				}
 
 				if(!bus[i].arrmsg2._text.includes("운행종료") && !bus[i].arrmsg2._text.includes("출발대기")
-				&& !bus[i].arrmsg2._text.includes("회차대기")) {
+				&& !bus[i].arrmsg2._text.includes("회차대기") && !bus[i].arrmsg1._text.includes("차고지출발")) {
 				arrmsg2Arr[i] = document.createElement("td");
 					if(bus[i].arrmsg2._text == "곧 도착") {
 						arrmsg2Arr[i].className = "arvlMsg"
