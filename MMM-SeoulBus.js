@@ -48,7 +48,7 @@ Module.register("MMM-SeoulBus", {
 		var reride_Num1Arr = new Array();
 		var reride_Num2Arr = new Array();
 
-		for(var i=0; i<15; i++) {
+		for(var i=0; i<10; i++) {
 			if(!bus[i].arrmsg1._text.includes("운행종료") && !bus[i].arrmsg1._text.includes("출발대기")
 			&& !bus[i].arrmsg1._text.includes("회차대기")) {
 				RowArr[i] = 'row' + i;
