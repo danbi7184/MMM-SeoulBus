@@ -48,6 +48,7 @@ Module.register("MMM-SeoulBus", {
 		var reride_Num1Arr = new Array();
 		var reride_Num2Arr = new Array();
 
+		//for(var i=0; i<bus.length; i++) { // 모든 버스 정보
 		for(var i=0; i<8; i++) {
 			if(!bus[i].arrmsg1._text.includes("운행종료") && !bus[i].arrmsg1._text.includes("출발대기")
 			&& !bus[i].arrmsg1._text.includes("회차대기")) {
