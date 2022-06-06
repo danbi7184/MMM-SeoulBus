@@ -102,7 +102,7 @@ Module.register("MMM-SeoulBus", {
 
 				rtNmArr[i].innerHTML = bus[i].rtNm._text;
 				RowArr[i].appendChild(routeTypeArr[i]);
-        RowArr[i].appendChild(rtNmArr[i]);
+        		RowArr[i].appendChild(rtNmArr[i]);
 
 				arrmsg1Arr[i] = document.createElement("td");
 				if(bus[i].arrmsg1._text == "곧 도착") {
@@ -122,7 +122,7 @@ Module.register("MMM-SeoulBus", {
 				  RowArr[i].appendChild(arrmsg1Arr[i]);
 				}
 
-				if(!bus[i].arrmsg2._text.includes("운행종료") && !bus[i].arrmsg2._text.includes("출발대기")
+/* 				if(!bus[i].arrmsg2._text.includes("운행종료") && !bus[i].arrmsg2._text.includes("출발대기")
 				&& !bus[i].arrmsg2._text.includes("회차대기")) {
 				arrmsg2Arr[i] = document.createElement("td");
 					if(bus[i].arrmsg2._text == "곧 도착") {
@@ -141,7 +141,7 @@ Module.register("MMM-SeoulBus", {
 					  arrmsg2Arr[i].innerHTML = arrmsg;
 					  RowArr2[i].appendChild(arrmsg2Arr[i]);
 					}
-				}
+				} */
 			}
 		}
 
