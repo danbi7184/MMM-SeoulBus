@@ -48,9 +48,10 @@ Module.register("MMM-SeoulBus", {
 		var reride_Num1Arr = new Array();
 		var reride_Num2Arr = new Array();
 
-		for(var i=0; i<bus.length; i++) {
+		//for(var i=0; i<bus.length; i++) { // 모든 버스 정보
+		for(var i=0; i<6; i++) {
 			if(!bus[i].arrmsg1._text.includes("운행종료") && !bus[i].arrmsg1._text.includes("출발대기")
-			&& !bus[i].arrmsg1._text.includes("회차대기") && !bus[i].arrmsg1._text.includes("차고지출발")) {
+			&& !bus[i].arrmsg1._text.includes("회차대기")) {
 				RowArr[i] = 'row' + i;
 				RowArr2[i] = 'row2' + i;
 				routeTypeArr[i] = 'routeType' + i;
@@ -122,8 +123,8 @@ Module.register("MMM-SeoulBus", {
 				  RowArr[i].appendChild(arrmsg1Arr[i]);
 				}
 
-				if(!bus[i].arrmsg2._text.includes("운행종료") && !bus[i].arrmsg2._text.includes("출발대기")
-				&& !bus[i].arrmsg2._text.includes("회차대기") && !bus[i].arrmsg1._text.includes("차고지출발")) {
+/*			if(!bus[i].arrmsg2._text.includes("운행종료") && !bus[i].arrmsg2._text.includes("출발대기")
+				&& !bus[i].arrmsg2._text.includes("회차대기")) {
 				arrmsg2Arr[i] = document.createElement("td");
 					if(bus[i].arrmsg2._text == "곧 도착") {
 						arrmsg2Arr[i].className = "arvlMsg"
@@ -141,7 +142,7 @@ Module.register("MMM-SeoulBus", {
 					  arrmsg2Arr[i].innerHTML = arrmsg;
 					  RowArr2[i].appendChild(arrmsg2Arr[i]);
 					}
-				}
+				} */
 			}
 		}
 
