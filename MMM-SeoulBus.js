@@ -6,7 +6,7 @@ Module.register("MMM-SeoulBus", {
 	  key1: "",
 	  key2: "",
 	  stSrch: "", // 정류소명
-		stId: "", // 정류소 ID
+	  stId: "", // 정류소 ID
 	  header: "버스 도착 정보",
 	  updateInterval: 60000,
 	},
@@ -30,21 +30,21 @@ Module.register("MMM-SeoulBus", {
 	},
 
 	getDom: function () {
-	  var wrapper = document.createElement("div");
-	  if (!this.loaded) {
+		var wrapper = document.createElement("div");
+		if (!this.loaded) {
 		return wrapper;
-	  }
-	  var busTable = document.createElement("table");
-	  busTable.className = "small";
+		}
+		var busTable = document.createElement("table");
+		busTable.className = "small";
 		busTable.style.borderSpacing = "3px";
-	  var bus = this.busInfo;
+		var bus = this.busInfo;
 
 		var RowArr = new Array();
 		var RowArr2 = new Array();
 		var routeTypeArr = new Array();
-    var rtNmArr = new Array();
-    var arrmsg1Arr = new Array();
-    var arrmsg2Arr = new Array();
+    	var rtNmArr = new Array();
+    	var arrmsg1Arr = new Array();
+   		var arrmsg2Arr = new Array();
 		var reride_Num1Arr = new Array();
 		var reride_Num2Arr = new Array();
 
